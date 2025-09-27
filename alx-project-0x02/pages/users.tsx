@@ -1,6 +1,5 @@
 import Header from "@/components/layout/Header";
 import UserCard from "@/components/common/UserCard";
-import { GetStaticProps } from "next";
 import { type UserProps } from "@/interfaces";
 
 interface ApiUser {
@@ -38,7 +37,7 @@ const UsersPage = ({ users }: UsersPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data: ApiUser[] = await res.json();
 
@@ -47,6 +46,6 @@ export const getStaticProps: GetStaticProps = async () => {
       users: data,
     },
   };
-};
+}
 
 export default UsersPage;
