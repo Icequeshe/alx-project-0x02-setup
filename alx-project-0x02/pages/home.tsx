@@ -1,6 +1,7 @@
-import { useState } from "react";
+import Header from "@/components/layout/Header";
 import Card from "@/components/common/Card";
 import PostModal from "@/components/common/PostModal";
+import { useState } from "react";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([
@@ -15,25 +16,28 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen p-6">
-      <h1 className="text-2xl font-bold mb-6">Welcome to the Home Page</h1>
+    <div className="min-h-screen">
+      <Header />
+      <div className="p-6">
+        <h1 className="text-2xl font-bold mb-6">Welcome to the Home Page</h1>
 
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="mb-6 px-4 py-2 bg-green-500 text-white rounded"
-      >
-        Add New Post
-      </button>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="mb-6 px-4 py-2 bg-green-500 text-white rounded"
+        >
+          Add New Post
+        </button>
 
-      {posts.map((post, index) => (
-        <Card key={index} title={post.title} content={post.content} />
-      ))}
+        {posts.map((post, index) => (
+          <Card key={index} title={post.title} content={post.content} />
+        ))}
 
-      <PostModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleAddPost}
-      />
+        <PostModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleAddPost}
+        />
+      </div>
     </div>
   );
 }
