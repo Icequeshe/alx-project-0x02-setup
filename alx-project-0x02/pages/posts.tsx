@@ -1,12 +1,41 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
+import PostCard from "@/components/common/PostCard";
+
+interface ApiPost {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 
 const PostsPage = () => {
+  const [posts, setPosts] = useState<ApiPost[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const data = await res.json();
+      setPosts(data.slice(0, 10)); // Limit to first 10 posts
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />
       <div className="p-6">
-        <h1 className="text-2xl font-bold">Posts Page</h1>
-        <p className="mt-4 text-gray-700">Here is where posts will be listed.</p>
+        <h1 className="text-2xl font-bold mb-6">Posts</h1>
+
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            title={post.title}
+            content={post.body}
+            userId={post.userId}
+          />
+        ))}
       </div>
     </div>
   );
