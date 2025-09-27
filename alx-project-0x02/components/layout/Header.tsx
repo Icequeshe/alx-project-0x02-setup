@@ -1,7 +1,14 @@
+import Link from "next/link";
+
 const Header = () => {
   return (
-    <header className="p-4 bg-gray-200 text-center">
-      <h1 className="text-xl font-bold">Welcome to ALX Project 2</h1>
+    <header className="p-4 bg-gray-200 flex gap-4 justify-center">
+      <Link href="/home" className="font-medium hover:underline">
+        Home
+      </Link>
+      <Link href="/about" className="font-medium hover:underline">
+        About
+      </Link>
     </header>
   );
 };
